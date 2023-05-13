@@ -16,8 +16,9 @@ char **splt_strng(char *str, const char *delimiters)
 	char *token = NULL;
 	int wc = 0;
 	int index = 0;
+	char *copy = strdup(str);
 
-	token = strtok(str, delimiters);
+	token = strtok(copy, delimiters);
 	while (token != NULL)
 	{
 		wc++;
@@ -28,7 +29,7 @@ char **splt_strng(char *str, const char *delimiters)
 	if (words == NULL)
 		return (NULL);
 
-	token = strtok(str, delimiters);
+	token = strtok(copy, delimiters);
 	while (token != NULL)
 	{
 		words[index] = strdup(token);
@@ -44,7 +45,8 @@ char **splt_strng(char *str, const char *delimiters)
 		token = strtok(NULL, delimiters);
 	}
 
-
+	words[index] = NULL;
+	free(copy);
 	return (words);
 }
 
@@ -72,9 +74,8 @@ void print_words(char **words)
  */
 int main(void)
 {
-	char *str = "This is a test string, the functions should split it.";
-	const char *delimiters = " ,.!";
-	int index = 0;
+	char str[] = "This is a test string, the functions should split it.";
+	char delimiters[] = " ";
 	char **words = splt_strng(str, delimiters);
 
 	if (words == NULL)
@@ -82,13 +83,7 @@ int main(void)
 		perror("Error:Splitting failed.\n");
 		return (1);
 }
-
-	while (words[index] != NULL)
-	{
-		free(words[index]);
-		index++;
-	}
-	free(words);
+	print_words(words);
 
 	return (0);
 }
