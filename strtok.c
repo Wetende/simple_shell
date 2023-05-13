@@ -82,7 +82,7 @@ int main(void)
 	{
 		perror("Error:Splitting failed.\n");
 		return (1);
-}
+	}
 	print_words(words);
 
 	return (0);
