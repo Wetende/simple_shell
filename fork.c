@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <string.h>
 
 /**
  * main - fork example
@@ -21,6 +22,6 @@ int main(void)
 	write(STDOUT_FILENO, "After fork\n", 12);
 
 	my_pid = getpid();
-	write(1, "My pid is \n", 12);
+	write(1, "My pid is ", 12);
 	return (0);
 }
