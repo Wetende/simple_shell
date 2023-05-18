@@ -12,16 +12,16 @@ int main(void)
 	pid_t pid;
 	pid_t my_pid;
 
-	write(STDOUT_FILENO, "Before fork\n", 12);
+	printf("Before fork\n");
 	pid = fork();
 	if (pid == -1)
 	{
 		perror("Error");
 		return (0);
 	}
-	write(STDOUT_FILENO, "After fork\n", 12);
-
+	printf("After fork\n");
 	my_pid = getpid();
-	write(1, "My pid is ", 12);
+	printf("My pid is %u\n", my_pid);
+
 	return (0);
 }
