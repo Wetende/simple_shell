@@ -21,7 +21,7 @@ char *_getenv(const char *name)
 
 		while (env_var[j] != '\0' && env_var[j] != '=' && name[j] != '\0')
 		{
-			if (env_var[j] != name[j]
+			if (env_var[j] != name[j])
 			break;
 			j++;
 		}
