@@ -135,7 +135,7 @@ int del_node_index(list_t **head, unsigned int index)
 }
 
 /**
- * _freeList - frees all nodes of a list
+ * _freeList - frees all nodes of a list.
  * @head_ptr: address of pointer to head node
  *
  * Return: void
