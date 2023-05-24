@@ -1,21 +1,23 @@
-#include <sys/file.h>
-#include <unistd.h>
-#include <stdio.h>
-
+#include "shell.h"
 /**
- * main - function that implements execve system call
- * Return: Always 0
+ * fork_and_exec - function that forks and executes the command using execvp
+ * @args: array of arguments to execute
  */
-int main(void)
+void fork_and_exec(char **args)
 {
-	char *argv[] = {"/bin/ls", "-l", "/usr", NULL};
+	pid_t pid;
 
-	write(1, "Before execve\n", 16);
-	if (execve(argv[0], argv, NULL) == -1)
+	pid = fork();
+
+	if (pid == -1)
 	{
-		perror("Error:");
+		perror("fork");
+		exit(EXIT_FAILURE);
 	}
-	write(1, "After execve\n", 16);
-
-	return (0);
+	else if (pid == 0)
+	{
+		execvp(args[0], args);
+		perror(args[0]);
+		exit(EXIT_FAILURE);
+	}
 }

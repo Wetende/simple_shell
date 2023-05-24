@@ -1,3 +1,4 @@
+
 #ifndef SHELL_H
 #define SHELL_H
 
@@ -15,24 +16,13 @@
 #define BUFSIZE 1024
 #define PROMPT "$ "
 
-/* main.c */
-int main(void);
-
-/* exec.c*/
-void execute_command(char *cmd);
-
-/* fork.c */
-pid_t fork(void);
-
-/* pid.c*/
-pid_t getpid(void);
-/*prompt.c*/
+/* Function prototypes */
 void get_command(char **cmd);
-/* ppid.c*/
-pid_t getppid(void);
-
-/* print.c */
 void write_status_message(const char *message, int status);
-
-#endif /* __MY_SHELL_H__*/
+void parse_command(char *cmd, char **args);
+int check_builtin(char **args);
+void fork_and_exec(char **args);
+void handle_status(int status);
+void env_builtin(int status);
+#endif /* SHELL_H */
 
