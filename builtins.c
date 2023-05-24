@@ -6,11 +6,11 @@
  */
 int check_builtin(char **args)
 {
-        if (strcmp(args[0], "exit") == 0)
-        {
-                exit(0);
-                return (1);
-        }
-/*add more built-in commands here if needed */
-        return (0);
+	if (strcmp(args[0], "exit") == 0)
+	{
+		exit(0);
+		return (1);
+	}
+
+	return (0);
 }
