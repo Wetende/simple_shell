@@ -24,7 +24,7 @@ char **take_environ(data_t *info)
  *  Return: 1 on delete, 0 otherwise
  * @var: the string env var property
  */
-int _unsetenv(data_t *info, char *var)
+int _unsetenv(data_t *data, char *var)
 {
 	list_t *node = data->env;
 	size_t i = 0;
@@ -58,7 +58,7 @@ int _unsetenv(data_t *info, char *var)
  * @value: the string env var value
  *  Return: Always 0
  */
-int _setenv(data_t *info, char *var, char *value)
+int _setenv(data_t *data, char *var, char *value)
 {
 	char *buf = NULL;
 	list_t *node;
@@ -73,7 +73,7 @@ int _setenv(data_t *info, char *var, char *value)
 	my_strcpy(buf, var);
 	my_strcat(buf, "=");
 	my_strcat(buf, value);
-	node = info->env;
+	node = data->env;
 	while (node)
 	{
 		p = _beginWith(node->str, var);
@@ -86,7 +86,7 @@ int _setenv(data_t *info, char *var, char *value)
 		}
 		node = node->next;
 	}
-	insert_end_node(&(info->env), buf, 0);
+	insert_end_node(&(data->env), buf, 0);
 	free(buf);
 	data->env_changed = 1;
 	return (0);

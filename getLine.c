@@ -8,7 +8,7 @@
  *
  * Return: bytes read
  */
-ssize_t input_buf(data_t *info, char **buf, size_t *len)
+ssize_t input_buf(data_t *data, char **buf, size_t *len)
 {
 	ssize_t r = 0;
 	size_t len_p = 0;
@@ -22,7 +22,7 @@ ssize_t input_buf(data_t *info, char **buf, size_t *len)
 
 		r = getline(buf, &len_p, stdin);
 
-		r = _getline(info, buf, &len_p);
+		r = _getline(data, buf, &len_p);
 
 		if (r > 0)
 		{
@@ -33,7 +33,7 @@ ssize_t input_buf(data_t *info, char **buf, size_t *len)
 			}
 			data->linecount_flag = 1;
 			rm_comments(*buf);
-			create_hist_list(info, *buf, info->histcount++);
+			create_hist_list(data, *buf, data->histcount++);
 			/* if (my_strchr(*buf, ';')) is this a command chain? */
 			{
 				*len = r;
@@ -50,7 +50,7 @@ ssize_t input_buf(data_t *info, char **buf, size_t *len)
  *
  * Return: bytes read successfully
  */
-ssize_t read_input(data_t *info)
+ssize_t read_input(data_t *data)
 {
 	static char *buf; /* the ';' command chain buffer */
 	static size_t i, j, len;
@@ -58,7 +58,7 @@ ssize_t read_input(data_t *info)
 	char **buf_p = &(data->arg), *p;
 
 	my_putchar(BUF_FLUSH);
-	r = input_buf(info, &buf, &len);
+	r = input_buf(data, &buf, &len);
 	if (r == -1) /* EOF */
 		return (-1);
 	if (len)
@@ -66,10 +66,10 @@ ssize_t read_input(data_t *info)
 		j = i;
 		p = buf + i;
 
-		_checkChain(info, buf, &j, i, len);
+		_checkChain(data, buf, &j, i, len);
 		while (j < len)
 		{
-			if (the_chain(info, buf, &j))
+			if (the_chain(data, buf, &j))
 				break;
 			j++;
 		}
@@ -97,7 +97,7 @@ ssize_t read_input(data_t *info)
  *
  * Return: r
  */
-ssize_t read_buf(data_t *info, char *buf, size_t *i)
+ssize_t read_buf(data_t *data, char *buf, size_t *i)
 {
 	ssize_t r = 0;
 
@@ -117,7 +117,7 @@ ssize_t read_buf(data_t *info, char *buf, size_t *i)
  *
  * Return: s
  */
-int _getline(data_t *info, char **ptr, size_t *length)
+int _getline(data_t *data, char **ptr, size_t *length)
 {
 	static char buf[READ_BUF_SIZE];
 	static size_t i, len;
@@ -131,7 +131,7 @@ int _getline(data_t *info, char **ptr, size_t *length)
 	if (i == len)
 		i = len = 0;
 
-	r = read_buf(info, buf, &len);
+	r = read_buf(data, buf, &len);
 	if (r == -1 || (r == 0 && len == 0))
 		return (-1);
 
