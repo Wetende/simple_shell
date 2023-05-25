@@ -24,20 +24,20 @@ int is_command(data_t *info, char *path)
 
 /**
  * duplicate_chars - duplicates characters
- * @pathstr: the PATH string
+ * @pstring: the PATH string
  * @start: the index to start from
  * @stop: the index to stop at
  *
  * Return: a pointer to new buffer
  */
-char *duplicate_chars(char *pathstr, int start, int stop)
+char *duplicate_chars(char *pstring, int start, int stop)
 {
 	static char buf[1024];
 	int i = 0, k = 0;
 
 	for (k = 0, i = start; i < stop; i++)
-		if (pathstr[i] != ':')
-			buf[k++] = pathstr[i];
+		if (pstring[i] != ':')
+			buf[k++] = pstring[i];
 	buf[k] = 0;
 	return (buf);
 }
@@ -45,17 +45,17 @@ char *duplicate_chars(char *pathstr, int start, int stop)
 /**
  * search_path - finds given command in the PATH string
  * @data: the data struct
- * @pathstr: the PATH string
+ * @pstring: the PATH string
  * @cmd: the command to find
  *
  * Return: full path of command if found or NULL
  */
-char *search_path(data_t *info, char *pathstr, char *cmd)
+char *search_path(data_t *info, char *pstring, char *cmd)
 {
 	int i = 0, curr_pos = 0;
 	char *path;
 
-	if (!pathstr)
+	if (!pstring)
 		return (NULL);
 	if ((my_strlen(cmd) > 2) && _beginWith(cmd, "./"))
 	{
@@ -64,9 +64,9 @@ char *search_path(data_t *info, char *pathstr, char *cmd)
 	}
 	while (1)
 	{
-		if (!pathstr[i] || pathstr[i] == ':')
+		if (!pstring[i] || pstring[i] == ':')
 		{
-			path = duplicate_chars(pathstr, curr_pos, i);
+			path = duplicate_chars(pstring, curr_pos, i);
 			if (!*path)
 				my_strcat(path, cmd);
 			else
@@ -76,7 +76,7 @@ char *search_path(data_t *info, char *pathstr, char *cmd)
 			}
 			if (is_command(info, path))
 				return (path);
-			if (!pathstr[i])
+			if (!pstring[i])
 				break;
 			curr_pos = i;
 		}
