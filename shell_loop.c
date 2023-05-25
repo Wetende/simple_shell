@@ -29,7 +29,8 @@ int hsh(data_t *info, char **av)
 		else if (responsive(info))
 			my_putchar('\n');
 		freeInformation(info, 0);
-	}	
+	}
+return (0);	
 }
 
 /**
