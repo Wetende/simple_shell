@@ -40,7 +40,7 @@ int _atoi(char *string)
  * @info: address of struct
  * Return: 1 always 0
  */
-int responsive(data *info)
+int responsive(data_t *info)
 {
 	return (isatty(STDIN_FILENO) && info->readfd <= 2);
 }
