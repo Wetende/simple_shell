@@ -38,7 +38,6 @@ int main(int ac, char **av)
 		info->readfd = fd;
 	}
 	increase_env_list(info);
-	look_into_hist(info);
-	hsh(info, av);
+		hsh(info, av);
 	return (EXIT_SUCCESS);
 }

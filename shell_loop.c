@@ -30,17 +30,7 @@ int hsh(data *info, char **av)
 			my_putchar('\n');
 		freeInformation(info, 0);
 	}
-	put_hist(info);
-	freeInformation(info, 1);
-	if (!responsive(info) && info->status)
-		exit(info->status);
-	if (builtin_ret == -2)
-	{
-		if (info->err_num == -1)
-			exit(info->status);
-		exit(info->err_num);
-	}
-	return (builtin_ret);
+	
 }
 
 /**
