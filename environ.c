@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * _myenv - prints the current environment
- * @info: Structure containing potential arguments. Used to maintain
+ * _myenv - function that prints the current environment
+ * @info: Structure member containing potential arguments. Used to maintain
  *          constant function prototype.
  * Return: Always 0
  */
-int _myenv(data *info)
+int _myenv(data_t *info)
 {
-	list_printed_string(info->env);
+	list_printed_string(data->env);
 	return (0);
 }
 
@@ -19,7 +19,7 @@ int _myenv(data *info)
  *
  * Return: the value
  */
-char *_getenv(data *info, const char *name)
+char *_getenv(data_t *info, const char *name)
 {
 	list_t *node = info->env;
 	char *p;
@@ -35,17 +35,17 @@ char *_getenv(data *info, const char *name)
 }
 
 /**
- * _mysetenv - Initialize a new environment variable,
- *             or modify an existing one
+ * _mysetenv - Initializes a new environment variable,
+ *             or modifies an already existing one
  * @info: Structure containing potential arguments. Used to maintain
- *        constant function prototype.
+ * constant function prototype.
  *  Return: Always 0
  */
-int _mysetenv(data *info)
+int _mysetenv(data_t *info)
 {
-	if (info->argc != 3)
+	if (data->argc != 3)
 	{
-		eputs_me("Incorrect number of arguements\n");
+		eputs_me("Incorrect number of arguments\n");
 		return (1);
 	}
 	if (_setenv(info, info->argv[1], info->argv[2]))

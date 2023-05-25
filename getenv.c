@@ -26,7 +26,7 @@ char **take_environ(data *info)
  */
 int _unsetenv(data *info, char *var)
 {
-	list_t *node = info->env;
+	list_t *node = data->env;
 	size_t i = 0;
 	char *p;
 
@@ -38,15 +38,15 @@ int _unsetenv(data *info, char *var)
 		p = _beginWith(node->str, var);
 		if (p && *p == '=')
 		{
-			info->env_changed = del_node_index(&(info->env), i);
+			data->env_changed = del_node_index(&(data->env), i);
 			i = 0;
-			node = info->env;
+			node = data->env;
 			continue;
 		}
 		node = node->next;
 		i++;
 	}
-	return (info->env_changed);
+	return (data->env_changed);
 }
 
 /**
@@ -58,7 +58,7 @@ int _unsetenv(data *info, char *var)
  * @value: the string env var value
  *  Return: Always 0
  */
-int _setenv(data *info, char *var, char *value)
+int _setenv(data_t *info, char *var, char *value)
 {
 	char *buf = NULL;
 	list_t *node;
@@ -81,13 +81,13 @@ int _setenv(data *info, char *var, char *value)
 		{
 			free(node->str);
 			node->str = buf;
-			info->env_changed = 1;
+			data->env_changed = 1;
 			return (0);
 		}
 		node = node->next;
 	}
 	insert_end_node(&(info->env), buf, 0);
 	free(buf);
-	info->env_changed = 1;
+	data->env_changed = 1;
 	return (0);
 }
