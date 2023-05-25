@@ -24,9 +24,9 @@ char **take_environ(data_t *info)
  *  Return: 1 on delete, 0 otherwise
  * @var: the string env var property
  */
-int _unsetenv(data_t *info, char *var)
+int _unsetenv(data_t *data, char *var)
 {
-	list_t *node = info->env;
+	list_t *node = data->env;
 	size_t i = 0;
 	char *p;
 
@@ -38,15 +38,15 @@ int _unsetenv(data_t *info, char *var)
 		p = _beginWith(node->str, var);
 		if (p && *p == '=')
 		{
-			info->env_changed = del_node_index(&(info->env), i);
+			data->env_changed = del_node_index(&(data->env), i);
 			i = 0;
-			node = info->env;
+			node = data->env;
 			continue;
 		}
 		node = node->next;
 		i++;
 	}
-	return (info->env_changed);
+	return (data->env_changed);
 }
 
 /**
@@ -58,7 +58,7 @@ int _unsetenv(data_t *info, char *var)
  * @value: the string env var value
  *  Return: Always 0
  */
-int _setenv(data_t *info, char *var, char *value)
+int _setenv(data_t *data, char *var, char *value)
 {
 	char *buf = NULL;
 	list_t *node;
@@ -73,7 +73,7 @@ int _setenv(data_t *info, char *var, char *value)
 	my_strcpy(buf, var);
 	my_strcat(buf, "=");
 	my_strcat(buf, value);
-	node = info->env;
+	node = data->env;
 	while (node)
 	{
 		p = _beginWith(node->str, var);
@@ -81,13 +81,13 @@ int _setenv(data_t *info, char *var, char *value)
 		{
 			free(node->str);
 			node->str = buf;
-			info->env_changed = 1;
+			data->env_changed = 1;
 			return (0);
 		}
 		node = node->next;
 	}
-	insert_end_node(&(info->env), buf, 0);
+	insert_end_node(&(data->env), buf, 0);
 	free(buf);
-	info->env_changed = 1;
+	data->env_changed = 1;
 	return (0);
 }
