@@ -7,7 +7,7 @@
  *        constant function prototype.
  *  Return: Always 0
  */
-int history_me(data *arg)
+int history_me(data_t *arg)
 {
 	list_is_print(arg->history);
 	return (0);
@@ -20,7 +20,7 @@ int history_me(data *arg)
  *
  * Return: Always 0 on success, 1 on error
  */
-int unset_alias(data *arg, char *str)
+int unset_alias(data_t *arg, char *str)
 {
 	char *x, c;
 	int ret;
@@ -43,7 +43,7 @@ int unset_alias(data *arg, char *str)
  *
  * Return: Always 0 on success, 1 on error
  */
-int set_alias(data *arg, char *str)
+int set_alias(data_t *arg, char *str)
 {
 	char *x;
 
@@ -86,7 +86,7 @@ int print_alias(list_t *node)
  *          constant function prototype.
  *  Return: Always 0
  */
-int alias_me(data *arg)
+int alias_me(data_t *arg)
 {
 	int i = 0;
 	char *x = NULL;
