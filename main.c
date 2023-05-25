@@ -1,15 +1,15 @@
 #include "shell.h"
 
 /**
- * main - entry point
- * @ac: arg count
- * @av: arg vector
+ * main - Entry point
+ * @av: argument vector
+ * @ac: argument count
  *
- * Return: 0 on success, 1 on error
+ * Return: 0 means Success, 1 if there's an error
  */
 int main(int ac, char **av)
 {
-	data_t info[] = { INFO_INIT };
+	data_t data[] = { INFO_INIT };
 	int fd = 2;
 
 	asm ("mov %1, %0\n\t"
@@ -35,7 +35,7 @@ int main(int ac, char **av)
 			}
 			return (EXIT_FAILURE);
 		}
-		info->readfd = fd;
+		data->readfd = fd;
 	}
 	increase_env_list(info);
 		hsh(info, av);
