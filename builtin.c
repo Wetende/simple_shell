@@ -7,7 +7,7 @@
  *  Return: exits with a given exit status
  *         (0) if info.argv[0] != "exit"
  */
-int exit_me(data *info)
+int exit_me(data_t *info)
 {
 	int exitcheck;
 
@@ -35,7 +35,7 @@ int exit_me(data *info)
  *          constant function prototype.
  *  Return: Always 0
  */
-int cd_me(data *info)
+int cd_me(data_t *info)
 {
 	char *s, *dir, buffer[1024];
 	int chdir_ret;
@@ -85,7 +85,7 @@ int cd_me(data *info)
  *          constant function prototype.
  *  Return: Always 0
  */
-int help_me(data *info)
+int help_me(data_t *info)
 {
 	char **arg_array;
 

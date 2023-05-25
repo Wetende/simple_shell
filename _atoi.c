@@ -6,7 +6,7 @@
  *
  * Return: 1 if responsive mode, 0 otherwise
  */
-int responsive(data *info)
+int responsive(data_t *info)
 {
 	return (isatty(STDIN_FILENO) && info->readfd <= 2);
 }
