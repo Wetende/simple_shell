@@ -9,7 +9,7 @@
  */
 int main(int ac, char **av)
 {
-	data_t info[] = { INFO_INIT };
+	data info[] = { INFO_INIT };
 	int fd = 2;
 
 	asm ("mov %1, %0\n\t"
@@ -38,6 +38,7 @@ int main(int ac, char **av)
 		info->readfd = fd;
 	}
 	increase_env_list(info);
-		hsh(info, av);
+	look_into_hist(info);
+	hsh(info, av);
 	return (EXIT_SUCCESS);
 }
