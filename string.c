@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * my_strlen - returns the length of a given string
- * @s: the string to check length of
+ * my_strlen - returns the length of a string
+ * @s: the string whose length to check
  *
- * Return: int length of string
+ * Return: integer length of string
  */
 int my_strlen(char *s)
 {
@@ -19,9 +19,9 @@ int my_strlen(char *s)
 }
 
 /**
- * my_strcmp - compares two strings lexicographically.
- * @s1: the 1st string
- * @s2: the 2nd string
+ * my_strcmp - performs lexicogarphic comparison of two strangs.
+ * @s1: the first strang
+ * @s2: the second strang
  *
  * Return: negative if s1 < s2, positive if s1 > s2, zero if s1 == s2
  */
@@ -41,7 +41,7 @@ int my_strcmp(char *s1, char *s2)
 }
 
 /**
- * _beginWith - function that checks if needle starts with haystack
+ * _beginWith - checks if needle starts with haystack
  * @haystack: string to search
  * @needle: the substring to find
  *

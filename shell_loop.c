@@ -31,7 +31,6 @@ int hsh(data_t *info, char **av)
 		freeInformation(info, 0);
 	}
 return (0);	
-
 }
 
 /**
