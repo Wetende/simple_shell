@@ -59,7 +59,7 @@ int _mysetenv(data_t *info)
  *        constant function prototype.
  *  Return: Always 0
  */
-int _myunsetenv(data *info)
+int _myunsetenv(data_t *info)
 {
 	int i;
 
@@ -80,7 +80,7 @@ int _myunsetenv(data *info)
  *          constant function prototype.
  * Return: Always 0
  */
-int increase_env_list(data *info)
+int increase_env_list(data_t *info)
 {
 	list_t *node = NULL;
 	size_t i;

@@ -7,7 +7,7 @@
  *
  * Return: 0 on success, 1 on error, or error code
  */
-int hsh(data *info, char **av)
+int hsh(data_t *info, char **av)
 {
 	ssize_t r = 0;
 	int builtin_ret = 0;
@@ -30,17 +30,7 @@ int hsh(data *info, char **av)
 			my_putchar('\n');
 		freeInformation(info, 0);
 	}
-	put_hist(info);
-	freeInformation(info, 1);
-	if (!responsive(info) && info->status)
-		exit(info->status);
-	if (builtin_ret == -2)
-	{
-		if (info->err_num == -1)
-			exit(info->status);
-		exit(info->err_num);
-	}
-	return (builtin_ret);
+	
 }
 
 /**
@@ -52,7 +42,7 @@ int hsh(data *info, char **av)
  *			1 if builtin found but not successful,
  *			-2 if builtin signals exit()
  */
-int get_builtin(data *info)
+int get_builtin(data_t *info)
 {
 	int i, built_in_ret = -1;
 	builtin_table builtintbl[] = {
@@ -83,7 +73,7 @@ int get_builtin(data *info)
  *
  * Return: void
  */
-void get_command(data *info)
+void get_command(data_t *info)
 {
 	char *path = NULL;
 	int i, k;
@@ -125,7 +115,7 @@ void get_command(data *info)
  *
  * Return: void
  */
-void forkCommand(data *info)
+void forkCommand(data_t *info)
 {
 	pid_t child_pid;
 

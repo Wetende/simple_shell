@@ -5,7 +5,7 @@
  * @args: Structure for arguments
  *  Return:  exit status
  */
-int exit_me(data *args)
+int exit_me(data_t *args)
 {
 	int exitcheck;
 
@@ -32,7 +32,7 @@ int exit_me(data *args)
  * @args: arguments to be used
  *  Return: Return Always 0
  */
-int help_me(data *args)
+int help_me(data_t *args)
 {
 	char **arg_array;
 
@@ -49,7 +49,7 @@ int help_me(data *args)
  * @args:  arguments
  *  Return: Returns Always 0
  */
-int cd_me(data *args)
+int cd_me(data_t *args)
 {
 	char *string, *dir, buffer[1024];
 	int chdir_ret;

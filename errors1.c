@@ -68,7 +68,7 @@ int _erratoi(char *string)
  * @estr: string containing specified error type
  * Return: 0 if no numbers, -1 on errorc
  */
-void _myerror_printing(data *args, char *estr)
+void _myerror_printing(data_t *args, char *estr)
 {
 	eputs_me(args->fname);
 	eputs_me(": ");
