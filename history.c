@@ -101,10 +101,9 @@ int look_into_hist(data_t *data)
 
 /**
  * create_hist_list - adds entry to a history linked list
- * @data: Structure containing potential arguments. 
+ * @data: Structure containing potential arguments.
  * @buf: buffer
  * @linecount: the history linecount, histcount
- *
  * Return: Always 0
  */
 int create_hist_list(data_t *data, char *buf, int linecount)

@@ -26,7 +26,7 @@ ssize_t input_buf(data_t *data, char **buf, size_t *len)
 		{
 			if ((*buf)[r - 1] == '\n')
 			{
-				(*buf)[r - 1] = '\0'; 
+				(*buf)[r - 1] = '\0';
 				r--;
 			}
 			data->linecount_flag = 1;
@@ -48,7 +48,7 @@ ssize_t input_buf(data_t *data, char **buf, size_t *len)
  */
 ssize_t read_input(data_t *data)
 {
-	static char *buf; 
+	static char *buf;
 	static size_t i, j, len;
 	ssize_t r = 0;
 	char **buf_p = &(data->arg), *p;
@@ -57,32 +57,32 @@ ssize_t read_input(data_t *data)
 	r = input_buf(data, &buf, &len);
 	if (r == -1) /* EOF */
 		return (-1);
-	if (len)	
+	if (len)
 	{
-		j = i; 
-		p = buf + i; 
+		j = i;
+		p = buf + i;
 
 		_checkChain(data, buf, &j, i, len);
-		while (j < len) 
+		while (j < len)
 		{
 			if (the_chain(data, buf, &j))
 				break;
 			j++;
 		}
 
-		i = j + 1; 
-		if (i >= len) 
+		i = j + 1;
+		if (i >= len)
 		{
-			i = len = 0; 
+			i = len = 0;
 			data->cmd_buf_type = CMD_NORM;
 		}
 
-		*buf_p = p; 
-		return (my_strlen(p)); 
+		*buf_p = p;
+		return (my_strlen(p));
 	}
 
-	*buf_p = buf; 
-	return (r); 
+	*buf_p = buf;
+	return (r);
 }
 
 /**
