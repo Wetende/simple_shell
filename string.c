@@ -15,7 +15,7 @@ char *_beginWith(const char *haystack, const char *needle)
 }
 /**
  * my_strlen - returns string length
- * @string: the string 
+ * @string: the string
  * Return: length of string
  */
 int my_strlen(char *string)
