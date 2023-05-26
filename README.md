@@ -1,1 +1,1 @@
-This is readme file for SIMPLE SHELL  Team Project ,for both Bienvenu Gbeti And Nicholas Ikiroma At ALX School ,Started from August 24th 2022 and will be end by september 7th 2022 
+This is the Simple Shell repository for Favour Michael and Cyprian Wetende. The Simple Shell project requires that we create our own version of the Unix Shell that can read input, evaluate it, print output and be ready to take input and repeat the whole process as though in a loop (over and over again).

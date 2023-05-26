@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * responsive - returns true if shell is responsive mode
- * @info: struct address
+ * responsive - returns true if shell is interactive mode
+ * @data: struct address
  *
- * Return: 1 if responsive mode, 0 otherwise
+ * Return: 1 if interactive mode, 0 otherwise
  */
-int responsive(data *info)
+int responsive(data_t *data)
 {
-	return (isatty(STDIN_FILENO) && info->readfd <= 2);
+	return (isatty(STDIN_FILENO) && data->readfd <= 2);
 }
 
 /**
@@ -26,9 +26,9 @@ int delimeter_me(char c, char *delim)
 }
 
 /**
- *isalpha_me - checks for alphabetic character
- *@c: The character to input
- *Return: 1 if c is alphabetic, 0 otherwise
+ * isalpha_me - checks for alphabetic character
+ * @c: The character to input
+ * Return: 1 if c is alphabetic, 0 otherwise
  */
 
 int isalpha_me(int c)

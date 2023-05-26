@@ -7,7 +7,7 @@
  * Return: allocated string containg history file
  */
 
-char *take_hist_file(data *info)
+char *take_hist_file(data_t *info)
 {
 	char *buf, *dir;
 
@@ -30,7 +30,7 @@ char *take_hist_file(data *info)
  *
  * Return: 1 on success, else -1
  */
-int put_hist(data *info)
+int put_hist(data_t *info)
 {
 	ssize_t fd;
 	char *filename = take_hist_file(info);
@@ -59,7 +59,7 @@ int put_hist(data *info)
  *
  * Return: histcount on success, 0 otherwise
  */
-int look_into_hist(data *info)
+int look_into_hist(data_t *info)
 {
 	int i, last = 0, linecount = 0;
 	ssize_t fd, rdlen, fsize = 0;
@@ -110,7 +110,7 @@ int look_into_hist(data *info)
  *
  * Return: Always 0
  */
-int create_hist_list(data *info, char *buf, int linecount)
+int create_hist_list(data_t *info, char *buf, int linecount)
 {
 	list_t *node = NULL;
 
@@ -129,7 +129,7 @@ int create_hist_list(data *info, char *buf, int linecount)
  *
  * Return: the new histcount
  */
-int number_again_hist(data *info)
+int number_again_hist(data_t *info)
 {
 	list_t *node = info->history;
 	int i = 0;

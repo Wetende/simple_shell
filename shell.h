@@ -93,7 +93,7 @@ typedef struct passinfo
 	int cmd_buf_type; /* CMD_type ||, &&, ; */
 	int readfd;
 	int histcount;
-} data;
+} data_t;
 
 #define INFO_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
@@ -107,20 +107,20 @@ typedef struct passinfo
 typedef struct builtin
 {
 	char *type;
-	int (*func)(data *);
+	int (*func)(data_t *);
 } builtin_table;
 
 
 /* toem_shloop.c */
-int hsh(data *, char **);
-int get_builtin(data *);
-void get_command(data *);
-void forkCommand(data *);
+int hsh(data_t *, char **);
+int get_builtin(data_t *);
+void get_command(data_t *);
+void forkCommand(data_t *);
 
 /* toem_parser.c */
-int is_command(data *, char *);
+int is_command(data_t *, char *);
 char *duplicate_chars(char *, int, int);
-char *search_path(data *, char *, char *);
+char *search_path(data_t *, char *, char *);
 
 /* loop_hsh.c */
 int loop_hsh(char **);
@@ -161,55 +161,55 @@ void *my_realloc(void *, unsigned int, unsigned int);
 int buff_free(void **);
 
 /* toem_atoi.c */
-int responsive(data *);
+int responsive(data_t *);
 int delimeter_me(char, char *);
 int isalpha_me(int);
 int _atoi(char *);
 
 /* toem_errors1.c */
 int _erratoi(char *);
-void _myerror_printing(data *, char *);
+void _myerror_printing(data_t *, char *);
 int _myprint(int, int);
 char *num_conversion(long int, int, int);
 void rm_comments(char *);
 
 /* toem_builtin.c */
-int exit_me(data *);
-int cd_me(data *);
-int help_me(data *);
+int exit_me(data_t *);
+int cd_me(data_t *);
+int help_me(data_t *);
 
 /* toem_builtin1.c */
-int history_me(data *);
-int alias_me(data *);
+int history_me(data_t *);
+int alias_me(data_t *);
 
 /*toem_getline.c */
-ssize_t read_input(data *);
-int _getline(data *, char **, size_t *);
+ssize_t read_input(data_t *);
+int _getline(data_t *, char **, size_t *);
 void handle_sigint(int);
 
 /* toem_getinfo.c */
-void deleteInformation(data *);
-void setInformation(data *, char **);
-void freeInformation(data *, int);
+void deleteInformation(data_t *);
+void setInformation(data_t *, char **);
+void freeInformation(data_t *, int);
 
 /* toem_environ.c */
-char *_getenv(data *, const char *);
-int _myenv(data *);
-int _mysetenv(data *);
-int _myunsetenv(data *);
-int increase_env_list(data *);
+char *_getenv(data_t *, const char *);
+int _myenv(data_t *);
+int _mysetenv(data_t *);
+int _myunsetenv(data_t *);
+int increase_env_list(data_t *);
 
 /* toem_getenv.c */
-char **take_environ(data *);
-int _unsetenv(data *, char *);
-int _setenv(data *, char *, char *);
+char **take_environ(data_t *);
+int _unsetenv(data_t *, char *);
+int _setenv(data_t *, char *, char *);
 
 /* toem_history.c */
-char *take_hist_file(data *info);
-int put_hist(data *info);
-int look_into_hist(data *info);
-int create_hist_list(data *info, char *buf, int linecount);
-int number_again_hist(data *info);
+char *take_hist_file(data_t *info);
+int put_hist(data_t *info);
+int look_into_hist(data_t *info);
+int create_hist_list(data_t *info, char *buf, int linecount);
+int number_again_hist(data_t *info);
 
 /* toem_lists.c */
 list_t *insert_node(list_t **, const char *, int);
@@ -226,10 +226,10 @@ list_t *begin_node_with(list_t *, char *, char);
 ssize_t take_index_node(list_t *, list_t *);
 
 /* toem_vars.c */
-int the_chain(data *, char *, size_t *);
-void _checkChain(data *, char *, size_t *, size_t, size_t);
-int _replaceAlias(data *);
-int replace_variable(data *);
+int the_chain(data_t *, char *, size_t *);
+void _checkChain(data_t *, char *, size_t *, size_t, size_t);
+int _replaceAlias(data_t *);
+int replace_variable(data_t *);
 int replace_str(char **, char *);
 
 #endif
