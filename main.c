@@ -42,6 +42,6 @@ int main(int ac, char **av)
 	increase_env_list(info);
 	look_into_hist(info);
 	hsh(info, av);
-	
+
 	return (EXIT_SUCCESS);
 }

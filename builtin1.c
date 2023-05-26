@@ -2,7 +2,7 @@
 
 /**
  * history_me - displays the history list, one command by line
- * @information: Structure containing potential arguments. 
+ * @information: Structure containing potential arguments.
  *  Return: Always 0
  */
 int history_me(data_t *information)
@@ -28,7 +28,8 @@ int unset_alias(data_t *information, char *str)
 	c = *p;
 	*p = 0;
 	ret = del_node_index(&(information->alias),
-		take_index_node(information->alias, begin_node_with(information->alias, str, -1)));
+		take_index_node(information->alias,
+			begin_node_with(information->alias, str, -1)));
 	*p = c;
 	return (ret);
 }
@@ -77,7 +78,7 @@ int print_alias(list_t *node)
 
 /**
  * alias_me - mimics the alias builtin (man alias)
- * @information: Structure containing potential arguments. 
+ * @information: Structure containing potential arguments.
  *  Return: Always 0
  */
 int alias_me(data_t *information)

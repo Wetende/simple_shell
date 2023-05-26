@@ -4,7 +4,7 @@
  * hsh - main shell loop
  * @info: the parameter & return info struct
  * @av: the argument vector from main()
- * Return: 0 on success, 1 
+ * Return: 0 on success, 1
  */
 int hsh(data_t *info, char **av)
 {
