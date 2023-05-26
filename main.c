@@ -4,8 +4,7 @@
  * main - entry point
  * @ac: arg count
  * @av: arg vector
- *
- * Return: 0 on success, 1 on error
+ * Return: 0 always 1
  */
 int main(int ac, char **av)
 {
@@ -24,6 +23,7 @@ int main(int ac, char **av)
 		{
 			if (errno == EACCES)
 				exit(126);
+
 			if (errno == ENOENT)
 			{
 				eputs_me(av[0]);
@@ -33,12 +33,15 @@ int main(int ac, char **av)
 				eputchar_me(BUF_FLUSH);
 				exit(127);
 			}
+
 			return (EXIT_FAILURE);
 		}
 		info->readfd = fd;
 	}
+
 	increase_env_list(info);
 	look_into_hist(info);
 	hsh(info, av);
+	
 	return (EXIT_SUCCESS);
 }

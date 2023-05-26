@@ -3,7 +3,6 @@
 /**
  * listLength - determines length of linked list
  * @h: pointer to first node
- *
  * Return: size of list
  */
 size_t listLength(const list_t *h)
@@ -19,9 +18,8 @@ size_t listLength(const list_t *h)
 }
 
 /**
- * list_str - returns an array of strings of the list->str
+ * list_str - array of strings of the list->str
  * @head: pointer to first node
- *
  * Return: array of strings
  */
 char **list_str(list_t *head)
@@ -54,28 +52,26 @@ char **list_str(list_t *head)
 	return (strs);
 }
 
-
 /**
  * list_is_print - prints all elements of a list_t linked list
- * @h: pointer to first node
- *
+ * @hd: pointer first node
  * Return: size of list
  */
-size_t list_is_print(const list_t *h)
+size_t list_is_print(const list_t *hd)
 {
-	size_t i = 0;
+	size_t index = 0;
 
-	while (h)
+	while (hd)
 	{
-		_puts(num_conversion(h->num, 10, 0));
+		_puts(num_conversion(hd->num, 10, 0));
 		my_putchar(':');
 		my_putchar(' ');
-		_puts(h->str ? h->str : "(nil)");
+		_puts(hd->str ? hd->str : "(nil)");
 		_puts("\n");
-		h = h->next;
-		i++;
+		hd = hd->next;
+		index++;
 	}
-	return (i);
+	return (index);
 }
 
 /**
@@ -83,17 +79,16 @@ size_t list_is_print(const list_t *h)
  * @node: pointer to list head
  * @prefix: string to match
  * @c: the next character after prefix to match
- *
- * Return: match node or null
+ * Return: 0
  */
 list_t *begin_node_with(list_t *node, char *prefix, char c)
 {
-	char *p = NULL;
+	char *pointer = NULL;
 
 	while (node)
 	{
-		p = _beginWith(node->str, prefix);
-		if (p && ((c == -1) || (*p == c)))
+		pointer = _beginWith(node->str, prefix);
+		if (pointer && ((c == -1) || (*pointer == c)))
 			return (node);
 		node = node->next;
 	}
@@ -101,22 +96,21 @@ list_t *begin_node_with(list_t *node, char *prefix, char c)
 }
 
 /**
- * take_index_node - gets the index of a node
+ * take_index_node - takes the index of a node
  * @head: pointer to list head
  * @node: pointer to the node
- *
  * Return: index of node or -1
  */
 ssize_t take_index_node(list_t *head, list_t *node)
 {
-	size_t i = 0;
+	size_t index = 0;
 
 	while (head)
 	{
 		if (head == node)
-			return (i);
+			return (index);
 		head = head->next;
-		i++;
+		index++;
 	}
 	return (-1);
 }

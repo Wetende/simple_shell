@@ -2,16 +2,15 @@
 
 /**
  * take_hist_file - gets the history file
- * @info: parameter struct
- *
+ * @data: parameter struct
  * Return: allocated string containg history file
  */
 
-char *take_hist_file(data_t *info)
+char *take_hist_file(data_t *data)
 {
 	char *buf, *dir;
 
-	dir = _getenv(info, "HOME=");
+	dir = _getenv(data, "HOME=");
 	if (!dir)
 		return (NULL);
 	buf = malloc(sizeof(char) * (my_strlen(dir) + my_strlen(HIST_FILE) + 2));
@@ -26,14 +25,13 @@ char *take_hist_file(data_t *info)
 
 /**
  * put_hist - creates a file, or appends to an existing file
- * @info: the parameter struct
- *
+ * @data: the parameter struct
  * Return: 1 on success, else -1
  */
-int put_hist(data_t *info)
+int put_hist(data_t *data)
 {
 	ssize_t fd;
-	char *filename = take_hist_file(info);
+	char *filename = take_hist_file(data);
 	list_t *node = NULL;
 
 	if (!filename)
@@ -43,7 +41,7 @@ int put_hist(data_t *info)
 	free(filename);
 	if (fd == -1)
 		return (-1);
-	for (node = info->history; node; node = node->next)
+	for (node = data->history; node; node = node->next)
 	{
 		putsfd_me(node->str, fd);
 		putfd_me('\n', fd);
@@ -55,16 +53,15 @@ int put_hist(data_t *info)
 
 /**
  * look_into_hist - reads history from file
- * @info: the parameter struct
- *
+ * @data: the parameter struct
  * Return: histcount on success, 0 otherwise
  */
-int look_into_hist(data_t *info)
+int look_into_hist(data_t *data)
 {
 	int i, last = 0, linecount = 0;
 	ssize_t fd, rdlen, fsize = 0;
 	struct stat st;
-	char *buf = NULL, *filename = take_hist_file(info);
+	char *buf = NULL, *filename = take_hist_file(data);
 
 	if (!filename)
 		return (0);
@@ -89,49 +86,48 @@ int look_into_hist(data_t *info)
 		if (buf[i] == '\n')
 		{
 			buf[i] = 0;
-			create_hist_list(info, buf + last, linecount++);
+			create_hist_list(data, buf + last, linecount++);
 			last = i + 1;
 		}
 	if (last != i)
-		create_hist_list(info, buf + last, linecount++);
+		create_hist_list(data, buf + last, linecount++);
 	free(buf);
-	info->histcount = linecount;
-	while (info->histcount-- >= HIST_MAX)
-		del_node_index(&(info->history), 0);
-	number_again_hist(info);
-	return (info->histcount);
+	data->histcount = linecount;
+	while (data->histcount-- >= HIST_MAX)
+		del_node_index(&(data->history), 0);
+	number_again_hist(data);
+	return (data->histcount);
 }
 
 /**
  * create_hist_list - adds entry to a history linked list
- * @info: Structure containing potential arguments. Used to maintain
+ * @data: Structure containing potential arguments. 
  * @buf: buffer
  * @linecount: the history linecount, histcount
  *
  * Return: Always 0
  */
-int create_hist_list(data_t *info, char *buf, int linecount)
+int create_hist_list(data_t *data, char *buf, int linecount)
 {
 	list_t *node = NULL;
 
-	if (info->history)
-		node = info->history;
+	if (data->history)
+		node = data->history;
 	insert_end_node(&node, buf, linecount);
 
-	if (!info->history)
-		info->history = node;
+	if (!data->history)
+		data->history = node;
 	return (0);
 }
 
 /**
  * number_again_hist - renumbers the history linked list after changes
- * @info: Structure containing potential arguments. Used to maintain
- *
+ * @data: Structure containing potential arguments
  * Return: the new histcount
  */
-int number_again_hist(data_t *info)
+int number_again_hist(data_t *data)
 {
-	list_t *node = info->history;
+	list_t *node = data->history;
 	int i = 0;
 
 	while (node)
@@ -139,5 +135,5 @@ int number_again_hist(data_t *info)
 		node->num = i++;
 		node = node->next;
 	}
-	return (info->histcount = i);
+	return (data->histcount = i);
 }
