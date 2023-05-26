@@ -1,24 +1,5 @@
 #include "shell.h"
-/**
- * take_index_node - gets the index of a node
- * @head: pointer to list head
- * @node: pointer to the node
- *
- * Return: index of node or -1
- */
-ssize_t take_index_node(list_t *head, list_t *node)
-{
-	size_t i = 0;
 
-	while (head)
-	{
-		if (head == node)
-			return (i);
-		head = head->next;
-		i++;
-	}
-	return (-1);
-}
 /**
  * listLength - determines length of linked list
  * @h: pointer to first node
@@ -119,3 +100,23 @@ list_t *begin_node_with(list_t *node, char *prefix, char c)
 	return (NULL);
 }
 
+/**
+ * take_index_node - gets the index of a node
+ * @head: pointer to list head
+ * @node: pointer to the node
+ *
+ * Return: index of node or -1
+ */
+ssize_t take_index_node(list_t *head, list_t *node)
+{
+	size_t i = 0;
+
+	while (head)
+	{
+		if (head == node)
+			return (i);
+		head = head->next;
+		i++;
+	}
+	return (-1);
+}

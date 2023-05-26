@@ -1,58 +1,24 @@
 #include "shell.h"
 
 /**
- * num_conversion - converts function
- * @num: number
- * @base: base
- * @flags: argument flags
- * Return: string
+ * _erratoi - converts a string to an integer
+ * @s: the string to be converted
+ * Return: 0 if no numbers in string, converted number otherwise
+ *       -1 on error
  */
-char *num_conversion(long int num, int base, int flags)
-{
-	static char *array;
-	static char buffer[50];
-	char sign = 0;
-	char *pointer;
-	unsigned long n = num;
-
-	if (!(flags & CONVERT_UNSIGNED) && num < 0)
-	{
-		n = -num;
-		sign = '-';
-
-	}
-	array = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
-	pointer = &buffer[49];
-	*pointer = '\0';
-
-	do	{
-		*--pointer = array[n % base];
-		n /= base;
-	} while (n != 0);
-
-	if (sign)
-		*--pointer = sign;
-	return (pointer);
-}
-
-/**
- * _erratoi - changes string to integer
- * @string: value of string
- * Return: 0 if no numbers in string,-1 on error
- */
-int _erratoi(char *string)
+int _erratoi(char *s)
 {
 	int i = 0;
 	unsigned long int result = 0;
 
-	if (*string == '+')
-		string++;  
-	for (i = 0;  string[i] != '\0'; i++)
+	if (*s == '+')
+		s++;  /* TODO: why does this make main return 255? */
+	for (i = 0;  s[i] != '\0'; i++)
 	{
-		if (string[i] >= '0' && string[i] <= '9')
+		if (s[i] >= '0' && s[i] <= '9')
 		{
 			result *= 10;
-			result += (string[i] - '0');
+			result += (s[i] - '0');
 			if (result > INT_MAX)
 				return (-1);
 		}
@@ -63,27 +29,29 @@ int _erratoi(char *string)
 }
 
 /**
- * _myerror_printing - writes error message
- * @args: the parameter & return args struct
+ * _myerror_printing - prints an error message
+ * @info: the parameter & return info struct
  * @estr: string containing specified error type
- * Return: 0 if no numbers, -1 on errorc
+ * Return: 0 if no numbers in string, converted number otherwise
+ *        -1 on error
  */
-void _myerror_printing(data_t *args, char *estr)
+void _myerror_printing(data_t *info, char *estr)
 {
-	eputs_me(args->fname);
+	eputs_me(info->fname);
 	eputs_me(": ");
-	_myprint(args->line_count, STDERR_FILENO);
+	_myprint(info->line_count, STDERR_FILENO);
 	eputs_me(": ");
-	eputs_me(args->argv[0]);
+	eputs_me(info->argv[0]);
 	eputs_me(": ");
 	eputs_me(estr);
 }
 
 /**
- * _myprint - prints a decimal number
+ * _myprint - function prints a decimal (integer) number (base 10)
  * @input: the input
  * @fd: the filedescriptor to write to
- * Return: characters(numbers) printed
+ *
+ * Return: number of characters printed
  */
 int _myprint(int input, int fd)
 {
@@ -117,10 +85,46 @@ int _myprint(int input, int fd)
 	return (count);
 }
 
+/**
+ * num_conversion - converter function, a clone of itoa
+ * @num: number
+ * @base: base
+ * @flags: argument flags
+ *
+ * Return: string
+ */
+char *num_conversion(long int num, int base, int flags)
+{
+	static char *array;
+	static char buffer[50];
+	char sign = 0;
+	char *ptr;
+	unsigned long n = num;
+
+	if (!(flags & CONVERT_UNSIGNED) && num < 0)
+	{
+		n = -num;
+		sign = '-';
+
+	}
+	array = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
+	ptr = &buffer[49];
+	*ptr = '\0';
+
+	do	{
+		*--ptr = array[n % base];
+		n /= base;
+	} while (n != 0);
+
+	if (sign)
+		*--ptr = sign;
+	return (ptr);
+}
 
 /**
- * rm_comments - replaces '#' with '\0'
- * @buf: string address to modify
+ * rm_comments - function replaces first instance of '#' with '\0'
+ * @buf: address of the string to modify
+ *
  * Return: Always 0;
  */
 void rm_comments(char *buf)

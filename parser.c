@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * is_command - function that determines whether a file is executable
- * @data: the data struct
- * @path: the path to target file
+ * is_command - determines if a file is an executable command
+ * @info: the info struct
+ * @path: path to the file
  *
- * Return: 1 if true, 0 if false
+ * Return: 1 if true, 0 otherwise
  */
 int is_command(data_t *info, char *path)
 {
@@ -24,38 +24,38 @@ int is_command(data_t *info, char *path)
 
 /**
  * duplicate_chars - duplicates characters
- * @pstring: the PATH string
- * @start: the index to start from
- * @stop: the index to stop at
+ * @pathstr: the PATH string
+ * @start: starting index
+ * @stop: stopping index
  *
- * Return: a pointer to new buffer
+ * Return: pointer to new buffer
  */
-char *duplicate_chars(char *pstring, int start, int stop)
+char *duplicate_chars(char *pathstr, int start, int stop)
 {
 	static char buf[1024];
 	int i = 0, k = 0;
 
 	for (k = 0, i = start; i < stop; i++)
-		if (pstring[i] != ':')
-			buf[k++] = pstring[i];
+		if (pathstr[i] != ':')
+			buf[k++] = pathstr[i];
 	buf[k] = 0;
 	return (buf);
 }
 
 /**
- * search_path - finds given command in the PATH string
- * @data: the data struct
- * @pstring: the PATH string
- * @cmd: the command to find
+ * search_path - finds this cmd in the PATH string
+ * @info: the info struct
+ * @pathstr: the PATH string
+ * @cmd: the cmd to find
  *
- * Return: full path of command if found or NULL
+ * Return: full path of cmd if found or NULL
  */
-char *search_path(data_t *info, char *pstring, char *cmd)
+char *search_path(data_t *info, char *pathstr, char *cmd)
 {
 	int i = 0, curr_pos = 0;
 	char *path;
 
-	if (!pstring)
+	if (!pathstr)
 		return (NULL);
 	if ((my_strlen(cmd) > 2) && _beginWith(cmd, "./"))
 	{
@@ -64,9 +64,9 @@ char *search_path(data_t *info, char *pstring, char *cmd)
 	}
 	while (1)
 	{
-		if (!pstring[i] || pstring[i] == ':')
+		if (!pathstr[i] || pathstr[i] == ':')
 		{
-			path = duplicate_chars(pstring, curr_pos, i);
+			path = duplicate_chars(pathstr, curr_pos, i);
 			if (!*path)
 				my_strcat(path, cmd);
 			else
@@ -76,7 +76,7 @@ char *search_path(data_t *info, char *pstring, char *cmd)
 			}
 			if (is_command(info, path))
 				return (path);
-			if (!pstring[i])
+			if (!pathstr[i])
 				break;
 			curr_pos = i;
 		}
