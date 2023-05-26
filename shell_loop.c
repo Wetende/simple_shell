@@ -4,8 +4,7 @@
  * hsh - main shell loop
  * @info: the parameter & return info struct
  * @av: the argument vector from main()
- *
- * Return: 0 on success, 1 on error, or error code
+ * Return: 0 on success, 1 
  */
 int hsh(data_t *info, char **av)
 {
@@ -80,7 +79,6 @@ int get_builtin(data_t *info)
 /**
  * get_command - finds a command in PATH
  * @info: the parameter & return info struct
- *
  * Return: void
  */
 void get_command(data_t *info)
@@ -122,7 +120,6 @@ void get_command(data_t *info)
 /**
  * forkCommand - forks a an exec thread to run cmd
  * @info: the parameter & return info struct
- *
  * Return: void
  */
 void forkCommand(data_t *info)
@@ -132,7 +129,6 @@ void forkCommand(data_t *info)
 	child_pid = fork();
 	if (child_pid == -1)
 	{
-		/* TODO: PUT ERROR FUNCTION */
 		perror("Error:");
 		return;
 	}
@@ -145,7 +141,6 @@ void forkCommand(data_t *info)
 				exit(126);
 			exit(1);
 		}
-		/* TODO: PUT ERROR FUNCTION */
 	}
 	else
 	{

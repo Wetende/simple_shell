@@ -3,7 +3,6 @@
 /**
  * responsive - returns true if shell is interactive mode
  * @data: struct address
- *
  * Return: 1 if interactive mode, 0 otherwise
  */
 int responsive(data_t *data)
